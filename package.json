@@ -1,0 +1,67 @@
+{
+  "name": "look-images",
+  "displayName": "Look Images",
+  "description": "在资源管理器中右键文件夹，以缩略图网格浏览其中的图片，点击缩略图查看大图。",
+  "version": "0.0.1",
+  "publisher": "look-images-dev",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.79.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "image",
+    "images",
+    "thumbnail",
+    "viewer",
+    "pictures"
+  ],
+  "activationEvents": [
+    "onCommand:lookImages.openFolder"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "lookImages.openFolder",
+        "title": "查看文件夹图片",
+        "category": "Look Images"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "lookImages.submenu",
+        "label": "Look Images"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "submenu": "lookImages.submenu",
+          "when": "explorerResourceIsFolder",
+          "group": "2_workspace"
+        }
+      ],
+      "lookImages.submenu": [
+        {
+          "command": "lookImages.openFolder",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^16.18.0",
+    "@types/vscode": "^1.79.0",
+    "@vscode/vsce": "^4.0.0",
+    "typescript": "^5.4.5"
+  }
+}
